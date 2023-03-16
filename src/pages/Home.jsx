@@ -13,12 +13,23 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/Api/employees");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    console.log(await axios.get("http://localhost:8080/api/test")) ;
+    const result = await axios.get("http://localhost:8080/api/employees");
     SetUser(result.data);
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/Api/${id}`);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios.delete(`http://localhost:8080/api/employees/${id}`);
     loadUsers();
   };
 
@@ -45,17 +56,20 @@ export default function Home() {
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewuser/${user.id}`}>
+                    to={`/viewuser/${user.id}`}
+                  >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/edituser/${user.id}`}>
+                    to={`/edituser/${user.id}`}
+                  >
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteUser(user.id)}>
+                    onClick={() => deleteUser(user.id)}
+                  >
                     Delete
                   </button>
                 </td>
