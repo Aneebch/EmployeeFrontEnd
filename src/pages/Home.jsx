@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div className="container">
       <div className="py-4">
-        <table className="table border shadow">
+        <table className="table border shadow table table-striped">
           <thead>
             <tr>
               <th scope="col">Id</th>
@@ -46,7 +46,7 @@ export default function Home() {
               <th scope="col">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-group-divider">
             {users.map((user, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
