@@ -61,7 +61,7 @@ export default function Home() {
                     View
                   </Link>
                   <Link
-                    className="btn btn-outline-primary mx-2"
+                    className="btn btn-outline-success"
                     to={`/edituser/${user.id}`}
                   >
                     Edit
