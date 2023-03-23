@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import employeeServices from "../services/employeeServices";
 
-export default function Home() {
-  const [users, SetUser] = useState([]);
+export default function Home  ()  {
+  const [users, setUsers] = useState([]);
 
   // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
 
   useEffect(() => {
-    loadUsers();
+   employeeServices.getAllEmployee().then(users => {
+    setUsers(users);
+   })
   }, []);
 
   const loadUsers = async () => {
@@ -20,7 +23,7 @@ export default function Home() {
     };
     console.log(await axios.get("http://localhost:8080/api/test")) ;
     const result = await axios.get("http://localhost:8080/api/employees");
-    SetUser(result.data);
+    setUsers(result.data);
   };
 
   const deleteUser = async (id) => {
