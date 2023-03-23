@@ -2,39 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import employeeServices from "../services/employeeServices";
+import useUser from "./useUser";
 
-export default function Home  ()  {
-  const [users, setUsers] = useState([]);
+export default function Home() {
+  const [users, deleteUser, loadUsers] = useUser();
 
   // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
 
   useEffect(() => {
-   employeeServices.getAllEmployee().then(users => {
-    setUsers(users);
-   })
-  }, []);
-
-  const loadUsers = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    console.log(await axios.get("http://localhost:8080/api/test")) ;
-    const result = await axios.get("http://localhost:8080/api/employees");
-    setUsers(result.data);
-  };
-
-  const deleteUser = async (id) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await axios.delete(`http://localhost:8080/api/employees/${id}`);
     loadUsers();
-  };
+  }, [loadUsers]);
+
 
   return (
     <div className="container">

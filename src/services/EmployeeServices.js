@@ -1,20 +1,26 @@
 import axios from "axios";
 
-const url = "http://localhost:8080/api/employees";
+const baseURL = "http://localhost:8080/api";
 
 const employeeServices = {
-  getAllEmployee() {
-    return axios
-      .get(url)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
+  getAllEmployee: async () => {
+    const result = await axios.get(`${baseURL}/employees`);
+    return result.data;
   },
-
-  getEmployeeById() {
-    return axios
-      .get(url + `/${id}`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
+  getEmployeeById: async (id) => {
+    const result = await axios.get(`${baseURL}/employees/${id}`);
+    return result.data;
+  },
+  addEmployee: async (user) => {
+    const result = await axios.post(`${baseURL}/employees`, user);
+    return result.data;
+  },
+  updateEmployee: async (id, user) => {
+    const result = await axios.put(`${baseURL}/employees/${id}`, user);
+    return result.data;
+  },
+  deleteEmployee: async (id) => {
+    await axios.delete(`${baseURL}/employees/${id}`);
   },
 };
 
