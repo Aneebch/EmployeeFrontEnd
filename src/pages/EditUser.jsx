@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import employeeServices from "../services/employeeServices";
+
 
 export default function EditUser() {
   let navigate = useNavigate();
@@ -26,13 +27,13 @@ export default function EditUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/api/employees/${id}`, user);
+    await employeeServices.updateEmployee(id, user);
     navigate("/");
   };
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/api/employees/${id}`);
-    setUser(result.data);
+    const result = await employeeServices.getEmployeeById(id);
+    setUser(result);
   };
 
   return (

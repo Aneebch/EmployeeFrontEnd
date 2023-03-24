@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import employeeServices from "../services/employeeServices";
 
 export default function AddUser() {
   let navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function AddUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/api/employees", user);
+    await employeeServices.addEmployee(user);
     navigate("/");
   };
   return (

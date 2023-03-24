@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import employeeServices from "../services/employeeServices";
 
@@ -11,7 +10,7 @@ const useUser = () => {
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/api/employees/${id}`);
+    await employeeServices.deleteEmployee(id);
     loadUsers();
   };
 
